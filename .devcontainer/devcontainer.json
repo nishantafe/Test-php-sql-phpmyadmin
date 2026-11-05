@@ -1,0 +1,36 @@
+{
+  "name": "PHP + MySQL",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "php",
+  "workspaceFolder": "/workspace",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "postCreateCommand": "git config --global --add safe.directory /workspace",
+  "forwardPorts": [
+    8080,
+    8081
+  ],
+  "portsAttributes": {
+    "8080": {
+      "label": "Website",
+      "onAutoForward": "openBrowser"
+    },
+    "8081": {
+      "label": "phpMyAdmin"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "cweijan.vscode-database-client2"
+      ],
+      "settings": {
+        "php.suggest.basic": false,
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "intelephense.telemetry.enabled": false
+      }
+    }
+  }
+}

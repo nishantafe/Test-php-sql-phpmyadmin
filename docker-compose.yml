@@ -1,0 +1,34 @@
+services:
+  php:
+    build: .
+    ports:
+      - "8080:80"          # website -> http://localhost:8080
+    volumes:
+      - .:/workspace:cached
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: school
+      MYSQL_USER: student
+      MYSQL_PASSWORD: student
+    ports:
+      - "3307:3306"        # only needed to connect from outside Docker
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8081:80"          # phpMyAdmin -> http://localhost:8081
+    depends_on:
+      - db
+
+volumes:
+  db_data:
