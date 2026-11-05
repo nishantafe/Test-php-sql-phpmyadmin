@@ -7,7 +7,7 @@ $pdo = new PDO(
     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 );
 
-// Add a student when the form is submitted
+// Add a student when the form is submitted!
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['name'])) {
     $stmt = $pdo->prepare('INSERT INTO students (name) VALUES (?)');
     $stmt->execute([$_POST['name']]);
